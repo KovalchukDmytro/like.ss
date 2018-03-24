@@ -4,11 +4,18 @@
 </IfModule>
 
 <IfModule mod_rewrite.c>
-    RewriteCond %{REQUEST_URI} ^/.*
-    RewriteRule ^(.*)$ app/web/$1 [L]
+   RewriteEngine On
+  RewriteBase /
+ RewriteRule ^admin/adminer.php admin/adminer.php [L]
+  RewriteCond %{REQUEST_URI} !^public
+  RewriteCond %{REQUEST_URI} !\.(rar)$
+  RewriteCond %{REQUEST_URI} !\.(csv)$
 
-    RewriteCond %{REQUEST_URI} !^/web/
-    RewriteCond %{REQUEST_FILENAME} !-f [OR]
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^.*$ app/web/index.php
+  RewriteCond %{REQUEST_URI} !\.s$
+
+
+  RewriteCond $1 !^(images/)
+  RewriteCond $1 !^(userfiles/)
+
+  RewriteRule ^(.*)$ app/web/$1 [L]
 </IfModule>
