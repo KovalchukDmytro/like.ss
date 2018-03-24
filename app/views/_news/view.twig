@@ -1,0 +1,11 @@
+<div class="crumbs">
+    <ul>
+        <li><a href="{{ Url.home() }}">Главная</a></li>
+        <li><a href="{{ url.toRoute('/news') }}">Новости</a></li>
+        <li><a href="{{ news.url }}">{{ news.info.title }}</a></li>
+    </ul>
+</div>
+<div class="about-page">
+    <h1>{{ news.info.title }}</h1>
+    {{ news.info.text|raw }}
+</div>

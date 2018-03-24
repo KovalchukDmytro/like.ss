@@ -1,0 +1,55 @@
+{{ use('app/widgets/SLinkPager') }}
+{{ use('app/widgets/Sbreadcrumbs') }}
+{{ use('app/widgets/AsideProductCategories') }}
+
+<!-- breadcrumbs -->
+<div class="b-breadcrumbs">
+    {{ Sbreadcrumbs_widget({'links' : breadcrumbs}) }}
+</div>
+<!-- /breadcrumbs -->
+
+<div class="b-container">
+<aside class="c-sidebar">
+        {{ aside_product_categories_widget({
+            'dropdown' : true
+        }) }}
+		</aside>
+    <main class="c-page">
+        <div class="c-page__header">
+            <h1 class="c-page__title">{{ this.params.shares }}</h1>
+        </div>
+        <div class="c-projects">
+
+            {% for share in shares %}
+                <article class="c-promotion">
+                    <div class="c-promotion__inner">
+                        <a href="{{ share.url }}" class="c-promotion__photo">
+                            <img src="{{ share.simg }}" alt="{{ share.info.title }}">
+                        </a>
+                        <div class="c-promotion__details">
+                            <h4 class="c-promotion__title">
+                                <a href="{{ share.url }}">{{ share.info.title | raw }}</a>
+                            </h4>
+                            <p class="c-promotion__text">{{ share.info.description | striptags | raw }}</p>
+                            <a href="{{ share.url }}" class="c-promotion__link">{{ this.params.get_details }}</a>
+                        </div>
+                    </div>
+                </article>
+            {% endfor %}
+
+        </div>
+
+        {{ s_link_pager_widget({
+            'pagination' : pages,
+            'maxButtonCount' : 5,
+            'options' : {
+                'class' : 'b-pagination',
+            },
+            'linkOptions' : {
+                'class' : 'b-pagination__link',
+            },
+
+        }) }}
+
+    </main>
+</div>

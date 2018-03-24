@@ -1,0 +1,25 @@
+<div class="crumbs">
+    <ul>
+        <li><a href="{{ Url.home() }}">Главная</a></li>
+        <li><a href="{{ Url.toRoute('/catalogs') }}">Каталоги</a></li>
+    </ul>
+</div>
+<div class="catalogs-page">
+    <h1>Каталог</h1>
+    {% for catalog in catalogs %}
+    {% if loop.index%2==1 %}
+    <div class="catalogs-block">
+        {% endif %}
+        <div>
+            <a href="{{ catalog.url }}">
+                <img src="{{ catalog.bimg }}">
+                <span>{{ catalog.info.title }}</span>
+            </a>
+        </div>
+
+        {% if loop.index%2==0 or loop.last  %}
+    </div>
+        {% endif %}
+    {% endfor %}
+
+</div>

@@ -1,0 +1,32 @@
+{{ use('app/widgets/SLinkPager') }}
+
+<div class="crumbs">
+    <ul>
+        <li><a href="{{ Url.home() }}">Главная</a></li>
+        <li><a href="{{ Url.toRoute('/webinar') }}">Вебинары</a></li>
+    </ul>
+</div>
+<div class="webinar-page">
+    <h1>Вебинары</h1>
+    <div id="content">
+        {% for article in articles %}
+        <div class="block-webinar">
+            <a href="{{ article.url }}">
+                <img class="" src="{{ article.bimg }}">
+                <p>{{ article.custom_date }}</p>
+            </a>
+            <p>{{ article.info.description }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {{ s_link_pager_widget({
+        'pagination' : pages,
+        'maxButtonCount' : 3,
+        'options' : {
+            'class' : 'pagination',
+        },
+        'linkOptions' : {
+            'class' : '',
+        },
+    }) }}
+</div>

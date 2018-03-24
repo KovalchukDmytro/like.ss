@@ -1,0 +1,41 @@
+{{ use('app/widgets/SLinkPager') }}
+<div class="crumbs">
+    <ul>
+        <li><a href="{{ Url.home() }}">Главная</a></li>
+        <li><a href="{{ url.toRoute('/news') }}">Новости</a></li>
+    </ul>
+</div>
+<div class="news-page">
+    <h1>Новости</h1>
+    <div id="content">
+        {% for new in news %}
+            {% if loop.index%2==1 %}
+        <div class="block-news">
+            {% endif %}
+            <div>
+                <a href="{{ new.url }}">
+                    <img class="float-left" src="{{ new.bimg }}" width="150">
+                    <span>{{ new.info.title }}</span>
+                </a>
+                <p>{{ new.info.description|raw }}</p>
+                <div>
+                    <span>{{ new.custom_date }}</span><a href="{{ new.url }}">Читать далее</a>
+                </div>
+            </div>
+        {% if loop.index%2==0 or loop.last %}
+        </div>
+        {% endif %}
+       {% endfor %}
+
+    </div>
+    {{ s_link_pager_widget({
+        'pagination' : pages,
+        'maxButtonCount' : 3,
+        'options' : {
+            'class' : 'pagination',
+        },
+        'linkOptions' : {
+            'class' : '',
+        },
+    }) }}
+</div>

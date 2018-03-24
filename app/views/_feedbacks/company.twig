@@ -1,0 +1,132 @@
+{{ use('app/widgets/Sbreadcrumbs') }}
+{{ use('app/widgets/SLinkPager') }}
+{{ use('app/widgets/AsideProductCategories') }}
+
+<!-- breadcrumbs -->
+<div class="b-breadcrumbs">
+    {{ Sbreadcrumbs_widget({'links' : breadcrumbs}) }}
+</div>
+<!-- /breadcrumbs -->
+
+
+<div class="b-container">
+<aside class="c-sidebar">
+        {{ aside_product_categories_widget({
+            'dropdown' : true
+        }) }}
+		</aside>
+    <main class="c-page">
+        <div class="c-page__header">
+            <div class="c-page__title">{{ this.params.feedbacks }}</div>
+        </div>
+        <div class="c-testimonials">
+            
+            <!-- Testimonial -->
+            {% for feedback in feedbacks %}
+                <div class="c-testimonial">
+                    <div class="c-testimonial__sender">
+                        <span class="c-testimonial__author">{{ feedback.user_name }}</span>
+                    </div>
+                    <div class="c-testimonial__details">
+                        <span class="c-testimonial__date">{{ feedback.date }}</span>
+                        <span class="c-testimonial__rate b-rating__{{ feedback.rating }}"></span>
+                        <div class="c-testimonial__content">
+                            <p>{{ feedback.comment }}</p>
+                            {% if feedback.imgs %}
+                                <div class="g-grid">
+                                    {% for img in feedback.imgs %}
+                                    <div class="g-col--one-third">
+                                        <img src="{{ img }}" alt="">
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <!-- /Testimonial -->
+
+        </div>
+        
+        {{ s_link_pager_widget({
+            'pagination' : pages,
+            'maxButtonCount' : 5,
+            'options' : {
+                'class' : 'b-pagination',
+            },
+            'linkOptions' : {
+                'class' : 'b-pagination__link',
+            },
+        }) }}
+
+        <!-- Testimonial Form -->
+        <form class="f-tsm" id="tsm_form" enctype="multipart/form-data">
+            <div class="g-unit">
+                <h3 class="g-unit__title"><span>{{ this.params.send_feedback }}</span></h3>
+                    <div class="g-unit__content">
+                        <div class="g-col--one-half">
+                            <div class="b-form__field is--required">
+                                <label class="g-hidden">{{ this.params.your_name }}</label>
+                                <input type="text" class="g-input" name="tsm_name" id="tsm_name" placeholder="{{ this.params.your_name }}">
+                            </div>
+                            <div class="b-form__field">
+                                <label class="g-hidden">{{ this.params.phone_number }}</label>
+                                <input type="tel" class="g-input" name="tsm_phone" id="tsm_phone" placeholder="{{ this.params.phone_number }}">
+                            </div>
+                            <div class="b-form__field is--required">
+                                <label class="g-hidden">Email</label>
+                                <input type="email" class="g-input" name="tsm_email" id="tsm_email" placeholder="Email">
+                            </div>
+                            <div class="b-form__field g-margin--none">
+                                <span class="b-form__rate-text">{{ this.params.rate_our_work }}</span>
+                                <span class="b-form__rate-widget b-rating__stars">
+                                    <span class="b-rating__star is--off">1</span>
+                                    <span class="b-rating__star is--off">2</span>
+                                    <span class="b-rating__star is--off">3</span>
+                                    <span class="b-rating__star is--off">4</span>
+                                    <span class="b-rating__star is--off">5</span>
+                                </span>
+                                <input type="hidden" name="tsm_rating" id="ratingValue">
+                            </div>
+                        </div>
+                        <div class="g-col--one-half">
+                            <div class="b-form__field">
+                                <textarea class="g-textarea g-textarea--three-rows" placeholder="{{ this.params.comment }}" name="tsm_comment" id="tsm_comment" cols="30" rows="5"></textarea>
+                            </div>
+                            <div class="b-form__field g-margin--none">
+                                <div class="b-form__file">
+                                    <div class="b-form__file-select">
+                                        <i class="icon-attach"></i>
+                                    </div>
+                                    <div class="b-form__file-label">{{ this.params.attach_img }}</div>
+                                    <input type="file" multiple name="tsm_upload[]" accept="image/png, image/jpeg" class="b-form__file-upload" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="g-clear g-text--center g-margin--b-base">
+                            <button type="submit" class="btn--primary">{{ this.params.send }}</button>
+                        </div>
+                  </div>
+            </div>
+        </form>
+        <!-- /Testimonial Form -->
+		
+    </main>
+</div>
+
+<!-- MODAL -->
+<div style="display:none">     
+    
+    <!-- Feedback success -->
+    <div class="b-modal box-modal" id="successFeedback">
+        <div class="box-modal_close arcticmodal-close"><i class="icon-close"></i></div>
+        <div class="b-modal__inner">
+            <div class="b-modal__title">{{ this.params.thank_you }}!</div>
+            <p>{{ this.params.your_feedback_was_sent }}!</p>
+        </div>
+    </div>
+    <!-- /Feedback success -->
+    
+</div>
+<!-- /MODAL -->

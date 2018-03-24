@@ -1,0 +1,196 @@
+{{ use('app/assets/AppAsset') }}
+{{ use('app/widgets/MenuWidgets') }}
+{{ use('app/widgets/Webinar') }}
+{{ use('app/widgets/Discribe') }}
+{{ register_app_asset(this) }}
+{{ this.beginPage }}
+<!DOCTYPE html>
+<html lang="{{ app.language }}">
+<head>
+
+
+    <meta charset="{{ app.charset }}">
+
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+    {{ html.csrfMetaTags | raw }}
+    <title>{{ html.decode(Seo.get('title')) | raw }}</title>
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+	
+    <meta name="description" content='{{ html.decode(Seo.get('description')) | raw }}'>
+
+    {% for l in this.params.langs %}
+	{% if l.name!='' %}
+        <link rel="alternate" href="{{ url(l.langUrl) }}" hreflang="{{ l.url }}-ua" />
+     {% endif %}
+	{% endfor %}
+
+	
+    {{  this.head  }}
+
+	
+	
+	
+	
+</head>
+<body>
+
+  
+{{ this.beginBody }}
+
+   <header>
+       <div class="info-block-top">
+           <div class="info-block-content">
+               <div class="address">Киев, ул. Волынская, 66-а</div>
+               <div class="phone">
+                   <span>+38 (044) 745 11 33</span>
+                   <span>+38 (044) 745 11 33</span>
+               </div>
+               <div class="search-lang">
+                   <form action="/search" class="search" method="post">
+                       <input class="search" name="search" id="" placeholder="Поиск" type="text" autocomplete="off">
+                       <button type="submit" class="icon-search"></button>
+                   </form>
+                   <span>
+                        <div class="langs">
+                            {% for l in this.params.langs %}
+
+                            <a   class="lang{% if l.url == this.params.lang.url %}s-active {% endif %}" href="{{ l.langUrl }}">{{ l.name|slice(0,3) }}</a>
+
+                            {% endfor %}
+                        </div>
+                    </span>
+               </div>
+           </div>
+       </div>
+
+       <div class="info-block-bottom">
+           <div class="info-block-content">
+               <div class="logo"><a href="{{ Url.home() }}"><img src="/images/logo.png"></a></div>
+               <div class="seo-text">Решения для биопроцессов Фильтрация и очистка Управление жидкостями  Конфигурируемая одноразовая система · Контроль процесса · Биореакторы </div>
+               <ul class="main-menu">
+                   <li><a href="{{ Url.toRoute('/about') }}">О компании</a></li>
+                   <li class="products">
+                       <a href="{{ Url.toRoute('/products') }}">Продукция</a>
+                       <div align="center" width=100% class="vvv">
+                         {{ menu_widgets_widget() }}
+                       </div>
+                   </li>
+                   <li><a href="{{ Url.toRoute('/partners') }}">Партнеры</a></li>
+                   <li><a href="{{ Url.toRoute('/catalogs') }}">Каталоги</a></li>
+                   <li><a href="{{ Url.toRoute('/news') }}">Новости</a></li>
+                   <li><a href="{{ Url.toRoute('/webinar') }}">Вебинар</a></li>
+                   <li><a href="{{ Url.toRoute('/contacts') }}">Контакты</a></li>
+               </ul>
+               <nav class="menu-top-box">
+                   <div class="open-menu"><img width="20" src="/images/menu.svg"></div>
+                   <div class="full_menu">
+                       <div class="menu_head">
+                           <div class="logo">
+                               <img src="/images/logo.png">
+                           </div>
+                           <div class="close_menu"></div>
+                       </div>
+                       <ul class="menu-top">
+                           <li><a href="{{ Url.toRoute('/products') }}">Продукция</a></li>
+                           <li><a href="{{ Url.toRoute('/partners') }}">Партнеры</a></li>
+                           <li><a href="{{ Url.toRoute('/catalogs') }}">Каталоги</a></li>
+                           <li><a href="{{ Url.toRoute('/news') }}">Новости</a></li>
+                           <li><a href="{{ Url.toRoute('/webinar') }}">Вебинар</a></li>
+                           <li><a href="{{ Url.toRoute('/contacts') }}">Контакты</a></li>
+                       </ul>
+                       <div class="info-block-adaptive">
+                           <div><span class="phone-adaptive"></span><span>+38 (044) 745 11 33</span></div>
+                           <div><span class="phone-adaptive"></span><span>+38 (044) 745 11 33</span></div>
+                           <div><span class="map-adaptive"></span><span>Киев, ул. Волынская, 66-а</span></div>
+                       </div>
+                   </div>
+               </nav>
+           </div>
+       </div>
+   </header>
+
+   <content>
+
+        {{ content | raw}}
+   </content>
+   <footer>
+       <div class="footer-menu">
+           <div>
+               <span>Общая информация</span>
+               <ul>
+                   <li><a href="{{ Url.toRoute('/about') }}">О компаии</a></li>
+                   <li><a href="{{ Url.toRoute('/partners') }}">Партнеры</a></li>
+                   <li><a href="{{ Url.toRoute('/catalogs') }}">Каталоги</a></li>
+                   <li><a href="{{ Url.toRoute('/contacts') }}">Контакты</a></li>
+               </ul>
+           </div>
+           <div>
+               <span>Продукция</span>
+               <ul>
+                   <li><a href="{{ Url.toRoute('/laboratoriya') }}">Лаборатория</a></li>
+                   <li><a href="{{ Url.toRoute('/biotehnologii') }}">Биотехнология</a></li>
+                   <li><a href="{{ Url.toRoute('/promushlennoe-oborudovanie') }}">Промышленное оборудование</a></li>
+               </ul>
+           </div>
+           <div>
+               <span>Вебинары</span>
+               {{ webinar_widget() }}
+           </div>
+           <div>
+               <span>Контакты</span>
+               <ul>
+                   <li><a href="">+38 (044) 555 666 88</a></li>
+                   <li><a href="">+38 (044) 555 666 88</a></li>
+                   <li><a class="" href="mailto:info@sartorius.ua">info@sartorius.ua</a></li>
+                   <li><a href="">Киев, Украина<br>ул. Крещатик 26</a></li>
+
+               </ul>
+           </div>
+            {{ discribe_widget() }}
+       </div>
+
+       <div class="copywrite">
+           <div class="copywrite-info">
+               <div>© Copyright 2017</div>
+               <div class="social-icons">
+                   <div><a href=""><img width="16" src="/images/vk.png" alt=""></a></div>
+                   <div><a href=""><img width="7" src="/images/fb.png" alt=""></a></div>
+                   <div><a href=""><img width="12" src="/images/twit.png" alt=""></a></div>
+                   <div><a href=""><img width="13" src="/images/link.png" alt=""></a></div>
+                   <div><a href=""><img width="19" src="/images/ins.png" alt=""></a></div>
+               </div>
+               <div>Create by SEO-Studio</div>
+           </div>
+       </div>
+   </footer>
+{% if this.params.view_script==1 %}
+   <script type="text/javascript">
+       $(document).ready(function(){
+           $('.open-menu').click(function(){
+               $('.full_menu').slideDown();
+           });
+           $('.close_menu').click(function(){
+               $('.full_menu').hide();
+           });
+       });
+   </script>
+
+   <script type="text/javascript">
+       $('document').ready(function() {
+           $('.main-menu li a').each(function() {
+               if ('http://848633.forcecrm.web.hosting-test.net/'+$(this).attr('href') == window.location.href)
+               {
+                   $(this).addClass('active');
+               }
+           });
+       });
+   </script>
+{% endif %}
+{{ this.endBody }}
+
+</body>
+
+
+
+</html>
+{{ this.endPage }}

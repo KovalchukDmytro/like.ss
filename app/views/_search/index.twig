@@ -1,0 +1,27 @@
+<div class="crumbs">
+    <ul>
+        <li><a href="{{ Url.home() }}">Главная</a></li>
+        <li><a href="#">Поиск</a></li>
+    </ul>
+</div>
+<div class="webinar-page">
+    <h1>Результаты поиска по запросу "{{ search }}"</h1>
+    {% for post in posts %}
+        <div>
+            <a href="{{ post.url }}">
+                <img class="float-left" src="{{ post.bimg }}" alt="{{ post.info.name }}" width="150">
+            </a>
+            {{ post.info.name }}
+        </div>
+    {% endfor %}
+    {{ s_link_pager_widget({
+        'pagination' : pages,
+        'maxButtonCount' : 3,
+        'options' : {
+            'class' : 'pagination',
+        },
+        'linkOptions' : {
+            'class' : '',
+        },
+    }) }}
+</div>

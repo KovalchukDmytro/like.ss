@@ -1,0 +1,92 @@
+{{ use('app/widgets/SLinkPager') }}
+<div class="crumbs">
+    <ul>
+        <li><a href="{{ Url.home() }}">Главная</a></li>
+        <li><a href="{{ Url.toRoute('/products') }}">Продукция</a></li>
+        {% if category.parent.parent %}
+            <li><a href="{{ category.parent.parent.url }}">{{ category.parent.parent.info.name }}</a></li>
+        {% endif %}
+        {% if category.parent %}
+        <li><a href="{{ category.parent.url }}">{{ category.parent.info.name }}</a></li>
+        {% endif %}
+        <li><a href="{{ category.url }}">{{ category.info.name }}</a></li>
+
+    </ul>
+</div>
+<div class="laboratory_subcategory-page">
+
+    <div class="main-block-subcategory">
+    <img class="float-left" src="{{ category.bimg }}">
+        <div>
+    <h1>{{ Seo.get('h1') }}</h1>
+    {{ category.info.txt|raw }}
+    {% if category.childs %}
+    <div class="subcategory">
+        {% for childs in category.childs %}
+        <a href="{{ childs.url }}">{{ childs.info.name }}</a>
+        {% endfor %}
+    </div>
+    {% endif %}
+    </div>
+    </div>
+    <div class="filters-products">
+        <div class="filters">
+            <div class="geke-filter">
+                <form action="">
+                    {% for f in filter %}
+                    <div class="geke-filter-item" data='{"name":"Цвет", "type":"list", "min":"", "max":"", "value":""}'>
+                        <span>{{ f.name }}</span>
+                        <ul>
+                            {% for value in f.values %}
+                                <li data-id="{{ loop.index }}">
+                                        <input type="checkbox" {% if value.selected %} checked {% endif %}
+                                               onchange="document.location.href = $(this).siblings('a').attr('href')" id=""
+                                               name="subscribe" value="newsletter">
+                                    <a href="{{ value.url }}">
+                                        <label for>{{ value.value_name }}</label> </a></li>
+
+                           {% endfor %}
+                        </ul>
+                        <input type="hidden" value="" name="tczvet" class="geke-values" />
+                    </div>
+                    {% endfor %}
+
+                </form>
+            </div>
+        </div>
+        <div class="products">
+            {% for product in products %}
+            <div>
+
+                <a href="{{ product.url }}">
+                    <img src="{{ product.bimg }}">
+                    <span>{{ product.info.name }}</span>
+                </a>
+                <p>Какая-то инфаКакая-то инфа Какая-то инфа Какая-то инфаКакая-то инфа Какая-то инфа</p>
+                <a href="{{ product.url }}"><button>Подробнее</button></a>
+            </div>
+            {% endfor %}
+        </div>
+       {# {{ s_link_pager_widget({
+            'pagination' : pages,
+            'maxButtonCount' : 3,
+            'options' : {
+                'class' : 'pagination',
+            },
+            'linkOptions' : {
+                'class' : '',
+            },
+        }) }}#}
+    </div>
+    {{ s_link_pager_widget({
+        'pagination' : pages,
+        'maxButtonCount' : 3,
+        'options' : {
+            'class' : 'pagination',
+        },
+        'linkOptions' : {
+            'class' : '',
+        },
+    }) }}
+    {{ Seo.get('text') }}
+</div>

@@ -1,0 +1,48 @@
+{{ use('app/widgets/SLinkPager') }}
+{{ use('app/widgets/Sbreadcrumbs') }}
+{{ use('app/widgets/AsideProductCategories') }}
+
+<!-- breadcrumbs -->
+    <div class="b-breadcrumbs">
+    {{ Sbreadcrumbs_widget({'links' : breadcrumbs}) }}
+    </div>
+<!-- /breadcrumbs -->
+
+<div class="b-container">
+<aside class="c-sidebar">
+{{ aside_product_categories_widget({
+            'dropdown' : true
+        }) }}
+		</aside>
+    <main class="c-page">
+            <div class="c-page__header">
+                <h1 class="c-page__title">{{ this.params.video }}</h1>
+            </div>
+            <div class="c-projects">
+                {% for video in videos %}
+                    <article class="c-video">
+                        <div class="c-video__inner">
+                            <a href="{{ video.url }}" class="c-video__photo">
+                                <img src="{{ video.simg }}" alt="{{ video.info.title | raw }} - {{ loop.index }}">
+                            </a>
+                            <div class="c-video__details">
+                                <div class="c-video__title"><a href="{{ video.url }}">{{ video.info.title | raw }}</a></div>
+                                <p class="c-video__text">{{ video.info.description | striptags | raw }}</p>
+                                <a href="{{ video.url }}" class="c-video__link">{{ this.params.get_details }}</a>
+                            </div>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        {{ s_link_pager_widget({
+            'pagination' : pages,
+            'maxButtonCount' : 5,
+            'options' : {
+                'class' : 'b-pagination',
+            },
+            'linkOptions' : {
+                'class' : 'b-pagination__link',
+            },
+        }) }}
+    </main>
+</div>

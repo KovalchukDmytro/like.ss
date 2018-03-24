@@ -1,0 +1,61 @@
+{{ use('app/widgets/Sbreadcrumbs') }}
+{{ use('app/widgets/BuyThing') }}
+{{ use('app/widgets/AsideProductCategories') }}
+
+<!-- breadcrumbs -->
+    <div class="b-breadcrumbs">
+    {{ Sbreadcrumbs_widget({'links' : breadcrumbs}) }}
+    </div>
+<!-- /breadcrumbs -->
+<div class="b-container">
+<aside class="c-sidebar">
+        {{ aside_product_categories_widget({
+            'dropdown' : true
+        }) }}
+		</aside>
+		
+
+	<main class="c-page">
+    <div class="b-container">
+
+        <div class="c-page__header">
+                <h1 class="c-page__title">{{ project.info.title }}</h1>
+        </div>
+    </div>
+    <div class="c-page__container">
+        <div class="b-project-slider__wrapper">
+            <div class="b-project-slider">
+
+                {% for simg in project.simgs %}
+                    {% if loop.index0 %}
+                        <div class="b-project-slider__item">
+                            <a href="{{ project.bimgs[loop.index0] }}" class="b-project-slider__link" rel="project">
+                                <img src="{{ simg }}" alt="{{ project.info.title | raw }} - фото {{ loop.index0 }}">
+                            </a>
+                        </div>
+                    {% endif %}    
+                {% endfor %}
+
+            </div>
+            <div class="b-project-slider__controls">
+                <a href="" class="b-project-slider__arrow">
+                    <i class="b-project-slider__arrow--prev"></i>
+                </a>
+                <a href="" class="b-project-slider__arrow">
+                    <i class="b-project-slider__arrow--next"></i>
+                </a>
+            </div>
+        </div>
+        
+        <div class="b-container">
+                <div class="g-fr">
+                    <!-- Special offer -->
+                        {{ buy_thing_widget({ 'is_narrow' : true }) }}
+                    <!-- /Special offer -->
+                </div>
+
+                {{ project.info.text | raw }}
+
+        </div>
+    </div>
+</main>

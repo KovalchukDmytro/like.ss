@@ -1,0 +1,31 @@
+<ul id="nav">
+    {% for m in menu %}
+    {% if m.parent_id==-1 %}
+        <li class="">
+
+        <a href="{{  m.url }}" title="{{ m.info.name }}">{{ m.info.name }}</a>
+        <ul>
+            {% if m.childs %}
+            {% for gchilds in m.childs %}
+            <li class="">
+                <a href="{{ gchilds.url }}" title="{{ gchilds.info.name }}">{{ gchilds.info.name }}</a>
+                <ul class="">
+                    {% if gchilds.childs %}
+                    {% for ggchilds in gchilds.childs %}
+                    <li>
+                        <a href="{{ ggchilds.url }}" title="{{ ggchilds.info.name }}">{{ ggchilds.info.name }}</a>
+                    </li>
+                    {% endfor %}
+                    {% endif %}
+
+                </ul>
+            </li>
+            {% endfor %}
+            {% endif %}
+
+
+        </ul>
+    </li>
+    {% endif %}
+{%  endfor %}
+</ul>

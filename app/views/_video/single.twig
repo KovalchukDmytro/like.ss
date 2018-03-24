@@ -1,0 +1,43 @@
+{{ use('app/widgets/Sbreadcrumbs') }}
+{{ use('app/widgets/BuyThing') }}
+{{ use('app/widgets/AdvBanners') }}
+{{ use('app/widgets/AsideProductCategories') }}
+
+<!-- breadcrumbs -->
+    <div class="b-breadcrumbs">
+    {{ Sbreadcrumbs_widget({'links' : breadcrumbs}) }}
+    </div>
+<!-- /breadcrumbs -->
+
+<div class="b-container">
+<aside class="c-sidebar">
+{{ aside_product_categories_widget({
+            'dropdown' : true
+        }) }}
+		</aside>
+    <main class="c-page">
+        <div class="c-post">
+            <div class="c-post__header">
+                <h1 class="c-post__title">{{ video.info.title }}</h1>
+            </div>
+            <div class="c-post__container">
+                <div class="g-fr">
+                    <!-- Special offer -->
+                        {{ buy_thing_widget({ 'is_narrow' : true }) }}
+                    <!-- /Special offer -->
+                </div>
+
+                <iframe class="youtube_iframe" width="560" height="315" src="https://www.youtube.com/embed/{{ video.youtube_url }}" frameborder="0" allowfullscreen></iframe>
+                {{ video.info.text | raw }}
+                 <br><br>
+                    <script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+<script src="//yastatic.net/share2/share.js"></script>
+<br><br><div class="ya-share1"> Поделиться с друзьями:<div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,moimir,twitter,viber,whatsapp,telegram" data-counter=""></div>    </div>
+
+            </div>
+        </div>
+
+        {{ adv_banners_widget({ 'template' : '500x300' }) }}
+        
+    </main>
+</div>

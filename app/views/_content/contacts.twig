@@ -1,0 +1,17 @@
+<div class="crumbs">
+    <ul class="breadcrumbs" itemscope="" itemtype="">
+        <li class="breadcrumbs-item" itemprop="itemListElement" itemscope="" itemtype="">
+            <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="item" href=""><span itemprop="name">Главная</span></a>
+            <meta itemprop="position" content="1">
+        </li>
+        <li class="breadcrumbs-item" itemprop="itemListElement" itemscope="" itemtype="">
+            <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="item" href=""><span itemprop="name">{{ Seo.get('h1') }}</span></a>
+            <meta itemprop="position" content="2">
+        </li>
+
+    </ul>
+</div>
+<div class="contacts-page">
+    <h1>{{ Seo.get('h1') }}</h1>
+    {{ page.info.text|raw }}
+</div>

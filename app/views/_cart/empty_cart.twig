@@ -1,0 +1,29 @@
+{{ use('app/widgets/Sbreadcrumbs') }}
+{{ use('app/widgets/ProductHits') }}
+{{ use('app/widgets/AsideProductCategories') }}
+
+<!-- breadcrumbs -->
+<div class="b-breadcrumbs">
+    {{ Sbreadcrumbs_widget({'links' : breadcrumbs}) }}
+</div>
+<!-- /breadcrumbs -->
+
+<div class="b-container">
+<aside class="c-sidebar">
+        {{ aside_product_categories_widget({
+            'dropdown' : true
+        }) }}
+		</aside>
+    <main class="c-page c-cart">
+        <h1 class="c-page__title">{{ this.params.empty_cart }}!</h1>
+
+        <section class="section">
+            {% if product_hits_widget({}) %}
+                <h3 class="section__title">{{ this.params.sales_hits }}</h3>
+                <div class="section__content">
+                    {{ product_hits_widget({}) }}
+                </div>
+            {% endif %}
+        </section>
+    </main>
+</div>

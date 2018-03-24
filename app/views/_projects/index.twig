@@ -1,0 +1,51 @@
+{{ use('app/widgets/SLinkPager') }}
+{{ use('app/widgets/Sbreadcrumbs') }}
+{{ use('app/widgets/AsideProductCategories') }}
+
+<!-- breadcrumbs -->
+    <div class="b-breadcrumbs">
+    {{ Sbreadcrumbs_widget({'links' : breadcrumbs}) }}
+    </div>
+<!-- /breadcrumbs -->
+
+<div class="b-container">
+<aside class="c-sidebar">
+        {{ aside_product_categories_widget({
+            'dropdown' : true
+        }) }}
+		</aside>
+    <main class="c-page">
+        <div class="c-page__header">
+                <h1 class="c-page__title">{{ this.params.our_projects }}</h1>
+        </div>
+        <div class="c-projects">
+            {% for project in projects %}
+                <article class="c-project">
+                    <div class="c-project__inner">
+                        <a href="{{ project.url }}" class="c-project__photo">
+                            <img src="{{ project.simg }}" alt="{{ project.info.title }} - {{ loop.index }}">
+                        </a>
+                        <div class="c-project__details">
+                            <div class="c-project__title"><a href="{{ project.url }}">{{ project.info.title }}</a></div>
+                            <p class="c-project__text">{{ project.info.description | striptags | raw }}</p>
+                            <a href="{{ project.url }}" class="c-project__link">{{ this.params.get_details }}</a>
+                        </div>
+                    </div>
+                </article>
+            {% endfor %}
+
+        </div>
+
+        {{ s_link_pager_widget({
+            'pagination' : pages,
+            'maxButtonCount' : 5,
+            'options' : {
+                'class' : 'b-pagination',
+            },
+            'linkOptions' : {
+                'class' : 'b-pagination__link',
+            },
+        }) }}
+        
+    </main>
+</div>

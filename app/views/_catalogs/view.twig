@@ -1,0 +1,11 @@
+<div class="crumbs">
+    <ul>
+        <li><a href="{{ Url.home() }}">Главная</a></li>
+        <li><a href="{{ Url.toRoute('/catalogs') }}">Каталоги</a></li>
+        <li><a href="{{ catalog.url }}">{{ catalog.info.title }}</a></li>
+    </ul>
+</div>
+<div class="about-page">
+    <h1>{{ catalog.info.title }}</h1>
+    {{ catalog.info.text|raw }}
+</div>

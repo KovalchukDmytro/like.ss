@@ -1,0 +1,180 @@
+{{ use('app/widgets/Sbreadcrumbs') }}
+{{ use('app/widgets/AsideProductCategories') }}
+
+<!-- breadcrumbs -->
+<div class="b-breadcrumbs">
+    {{ Sbreadcrumbs_widget({'links' : breadcrumbs}) }}
+</div>
+<!-- /breadcrumbs -->
+
+<div class="b-container">
+<aside class="c-sidebar">
+        {{ aside_product_categories_widget({
+            'dropdown' : true
+        }) }}
+		</aside>
+    <main class="c-page c-cart">
+        <h1 class="c-page__title">{{ this.params.creating_order }}</h1>
+        <form id="order_items_info">
+            <div class="b-order-items">
+                {% for product in products %}
+                    <div class="b-order-item">
+                        <div class="b-order-item__product">
+                            <i class="icon-close-circle" data-product="{{ product.id }}"></i>                            
+                            <a href="{{ product.url }}" class="b-order-item__photo">
+                                <img src="{{ product.simg }}" alt="{{ product.info.name }}">
+                            </a>
+                            <h4 class="b-order-item__title">{{ product.info.name }}</h4>
+                        </div>
+                        <div class="b-order-item__qty">
+                            {{ this.params.count }}
+                            <div class="b-qty-changer">
+                                <span class="js-qty-minus">
+                                    <i class="icon-minus"></i>
+                                </span>
+                                <input type="text" name="order_item_id[]" value="{{ product.id }}" hidden>
+                                <input type="text" name="order_item_count[]" value="{{ product.count_order }}" class="js-qty-input">
+                                <input type="text" name="order_item_price[]" value="{{ product.price }}" class="js-qty-price" hidden>
+                                <span class="js-qty-plus">
+                                    <i class="icon-plus"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="b-order-item__price">
+                            {{ this.params.price }}: <span><span class="item_price">{{ product.price | number_format(0 , " ", " ") }}</span>&nbsp;{{ this.params.tenge }}</span>
+                        </div>
+                        <div class="b-order-item__amount">
+                            <input type="text" class="item_sum" name="item_sum[]" value="{{ product.price * product.count_order }}" hidden>
+                            {% set temp_sum = product.price * product.count_order %}
+                            {{ this.params.sum }}: <span><span class="item_sum">{{ temp_sum | number_format(0 , " ", " ") }}</span>&nbsp;{{ this.params.tenge }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+            <div class="b-order__total">
+                <input type="text" class="order_sum" name="order_sum" value="{{ sum }}" hidden>
+                <span>{{ this.params.general_cost }}:</span>
+                <strong><span class="order_sum">{{ sum | number_format(0 , " ", " ") }}</span>&nbsp;{{ this.params.tenge }}</strong>
+            </div>
+        </form>
+
+        {% if also_products %}
+            <article class="g-block">
+                <h3 class="g-block__title">{{ this.params.same_products }}</h3>
+                <div class="b-product__list g-five-in-row">
+                    {% for also_product in also_products %}
+                        <article class="b-product__item">
+                            <div class="b-product__inner">
+                                <a href="{{ also_product.url }}" class="b-product__photo">
+                                    <img src="{{ also_product.simg }}" alt="{{ also_product.info.name }}">
+                                </a>
+                                <h3 class="b-product__title">
+                                    <a href="{{ also_product.url }}">{{ also_product.info.name }}</a>
+                                </h3>
+                                <div class="b-product__price">
+                                    {{ also_product.price | number_format(0 , " ", " ") }} {{ this.params.tenge }}
+                                </div>
+                                <div class="b-product__properties">
+                                    <span class="b-product__property">
+                                        {% for param in also_product.extraparams %}
+                                            {% if param.in_filter %}
+                                                {{ param.param_name }}: {{ param.value_name }}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </span>
+                                </div>
+                                <div class="b-product__action">
+                                    <a href="{{ also_product.url }}" class="btn--buy">
+                                        <i class="icon-basket"></i>
+                                        {{ this.params.buy }}
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+            </article>
+        {% endif %}
+
+        <form class="f-usr" id="usr_form">
+            <div class="g-unit">
+                <h3 class="g-unit__title"><span>{{ this.params.contact_data }}</span></h3>
+                <div class="g-unit__content">
+                    <div class="g-col--one-half">
+                        <div class="b-form__field is--required">
+                            <label class="g-hidden">{{ this.params.your_name }}</label>
+                            <input type="text" class="g-input" name="usr_name" id="usr_name" placeholder="{{ this.params.your_name }}">
+                        </div>
+                        <div class="b-form__field is--required">
+                            <label class="g-hidden">{{ this.params.phone_number }}</label>
+                            <input type="tel" class="g-input" name="usr_phone" id="usr_phone" placeholder="{{ this.params.phone_number }}">
+                        </div>
+                        <div class="b-form__field g-margin--none is--required">
+                            <label class="g-hidden">Email</label>
+                            <input type="email" class="g-input" name="usr_email" id="usr_email" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="g-col--one-half">
+                        <textarea class="g-textarea g-textarea--three-rows" placeholder="{{ this.params.comment }}" name="usr_comment" id="usr_comment" cols="30" rows="5"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="g-unit">
+                <h3 class="g-unit__title"><span>{{ this.params.way_of_payment_and_delivery }}</span></h3>
+                <div class="g-unit__content">
+                    <div class="g-col--one-third g-text--right">
+                        <span class="g-text--lg">{{ this.params.way_of_delivery }}:</span>
+                    </div>
+                    <div class="g-col--two-third">
+                        <div class="b-form__field g-margin--b-sm">
+                            <input type="radio" name="usr_del" class="g-radio" id="del-1" checked="" value="1" />
+                            <label for="del-1">{{ this.params.delivery }}</label>
+                        </div>
+                        <div class="b-form__field g-padding--l-lg g-margin--b-sm is--required">
+                            <label class="g-hidden">{{ this.params.enter_address_of_delivery }}</label>
+                            <input type="text" class="g-input" name="usr_address" id="usr_address" placeholder="{{ this.params.enter_address_of_delivery }}">
+                            <div class="g-text--small g-margin--t-sm">
+                                <span class="g-text--base g-text--color-alt">*</span> {{ this.params.price_dont_include_delivery }}.<br>
+                                {{ this.params.pay_in_fact_of_delivery }}.
+                            </div>
+                        </div>
+                        <div class="b-form__field">
+                            <input type="radio" name="usr_del" class="g-radio" id="del-2" value="7" />
+                            <label for="del-2">{{ this.params.selfdelivery }}</label>
+                            <div class="g-text--small g-margin--t-sm">
+                                <span class="g-text--base g-text--color-alt">*</span> 
+                                {{ this.params.selfdelivery_address }}.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="g-divider"></div>
+                    <div class="g-col--one-third g-text--right">
+                        <span class="g-text--lg">{{ this.params.way_of_payment }}:</span>
+                    </div>
+                    <div class="g-col--two-third">
+                        <div class="b-form__field">
+                            <input type="radio" name="usr_pay" class="g-radio" id="pay-1" checked="" value="2" />
+                            <label for="pay-1">{{ this.params.cash_in_fact_of_taken }}</label>
+                        </div>
+                        <div class="b-form__field">
+                            <input type="radio" name="usr_pay" class="g-radio" id="pay-2" value="9" />
+                            <label for="pay-2">{{ this.params.online_pay }}</label>
+                        </div>
+                        <div class="b-form__field b-icons">
+                            <i class="icon-visa"></i>
+                            <i class="icon-mastercard"></i>
+                            <i class="icon-yandex"></i>
+                            <i class="icon-qiwi"></i>
+                            <i class="icon-kassa24"></i>
+                            <i class="icon-atf"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="g-text--center g-margin--b-base">
+                <input type="submit" class="btn--primary" value="{{ this.params.creating_order }}">
+            </div>
+        </form>
+    </main>
+</div>

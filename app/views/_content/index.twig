@@ -1,0 +1,80 @@
+<div class="main-page">
+  <div class="fadeOut owl-carousel owl-theme">
+    {% for slide in slides %}
+    <div class="item">
+      <img src="{{ slide.bimg }}" alt="">
+      <div class="content-inside">
+        <div>
+          {{ slide.info.title }}
+          <a href="{{ slide.href }}"><button class="more-details">подробнее</button></a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  
+  </div>
+
+  <div class="products">
+    {% for item in menu %}
+    {% if item.id==157 %}
+    <div class="laboratory">
+      <span>{{ item.info.name }}</span>
+      <ul class="">
+        {% for childs in item.childs %}
+        <li><a href="{{ childs.url }}">{{ childs.info.name }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% elseif item.id==171 %}
+    <div class="biotechnology">
+      <span>{{ item.info.name }}</span>
+      <ul>
+          {% for childs in item.childs %}
+            <li><a href="{{ childs.url }}">{{ childs.info.name }}</a></li>
+          {% endfor %}
+      </ul>
+    </div>
+    {% elseif item.id==247 %}
+    <div class="industrial-equipment">
+      <span>{{ item.info.name }}</span>
+      <ul>
+          {% for childs in item.childs %}
+            <li><a href="{{ childs.url }}">{{ childs.info.name }}</a></li>
+          {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="about-us">
+    <div class="about-us-info">
+      <p>почему сартокарат?</p>
+      <span>О компании</span>
+      <p>Sartorius является ведущим международным поставщиком фармацевтического и лабораторного оборудования. Благодаря нашим инновационным продуктам и услугам мы
+        помогаем нашим клиентам по всему мируэффективно и экономично реализовать свои сложные и качественные процессы биопроизводства и лабораторные процессы.</p>
+      <div class="read-more"><a href="">читать даьше</a></div>
+    </div>
+    <div class="numbers" id="counts">
+      <div class="block-font">
+        <p class="spincrement">1968</p>
+        <p>год основания<br>компании</p>
+      </div>
+      <div class="block-font">
+        <p class="spincrement">46</p>
+        <p>представительств<br>во всем мире</p>
+      </div>
+      <div class="block-font2">
+        <p class="spincrement">568 500</p>
+        <p>единиц продукции<br>в год</p>
+      </div>
+      <div class="block-font2">
+        <p class="spincrement">64 254</p>
+        <p>квалиицированных<br>сотрудника</p>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+  {{ Seo.get('text') }}
+</div>

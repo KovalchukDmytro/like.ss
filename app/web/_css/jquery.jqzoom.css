@@ -1,0 +1,228 @@
+.geke-filter{
+    overflow:hidden;
+    background:#fff;
+    text-align:left;
+    width: 300px;
+}
+.geke-filter-item{
+    position:relative;
+}
+.geke-filter-item a{
+    text-decoration: none;
+    color: #363938;
+}
+.geke-filter-item label {
+    padding-left: 5px;
+}
+.geke-filter-item span{
+    background: #f7f7f7;
+    margin: 0;
+    padding: 7px 8px;
+    font-weight: bold;
+    position: relative;
+    z-index: 1;
+    display: block;
+    font-size: 16px;
+}
+.geke-filter-item ul{
+    margin:0;
+    padding:10px 0;
+    overflow-x:hidden;
+    border-bottom:1px solid #ddd;
+    border-top:1px solid #ddd;
+    max-height:200px;
+    position:relative;
+    z-index:1;
+}
+.geke-filter-item ul li{
+    display:block;
+    overflow:hidden;
+    padding: 3px 5px 0 15px;
+}
+.geke-filter-item ul li:hover{
+    cursor:pointer;
+}
+.geke-filter-item ul li span{
+    display:inline-block;
+    margin:-2px 5px 0 0;
+    border:1px solid #b3b3b3;
+    vertical-align:middle;
+}
+
+.geke-filter-item.list li{
+    line-height:18px;
+    padding:4px 0 4px 7px;
+}
+
+.geke-filter-item.calendar li{
+    line-height:23px;
+    height:23px;
+    width:31px;
+    text-align:center;
+    border:1px solid #b3b3b3;
+    border-radius:3px;
+    float:left;
+    margin:0 0 5px 7px;
+    display:table;
+}
+
+.geke-filter-item.calendar li.active{
+    background: #FA871A;
+    border: 1px solid #FA871A;
+    color:#fff;
+}
+.geke-filter-checkbox{
+    width:14px;
+    display:table-cell;
+}
+.geke-fliter-list-text{
+    display:table-cell;
+}
+.geke-filter-item_submit{
+    padding:10px 0;
+    text-align:center;
+}
+.geke-filter-item_submit a{
+    display: inline-block;
+    text-decoration: none;
+    border: 1px solid #bcbcbc;
+    border-radius: 2px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 20px;
+    height: 20px;
+    text-align: center;
+    width: 156px;
+    background: #FA871A;
+}
+
+.geke-filter-reset {
+    text-decoration: none;
+    border-radius: 2px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 20px;
+    height: 20px;
+    text-align: center;
+    width: 100%;
+    background: #FA871A;
+}
+
+
+.tabs {
+    min-width: 320px;
+    max-width: 800px;
+    padding: 0px;
+    margin: 0 auto;
+}
+
+.tabs>section {
+    display: none;
+    padding: 15px;
+    background: #fff;
+    border: 1px solid #ddd;
+}
+
+.tabs>section>p {
+    margin: 0 0 5px;
+    line-height: 1.5;
+    color: #383838;
+    /* прикрутим анимацию */
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+}
+
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.tabs>input {
+    display: none;
+    position: absolute;
+}
+
+.tabs>label {
+    display: inline-block;
+    margin: 0 0 -1px;
+    padding: 15px 25px;
+    font-weight: 600;
+    text-align: center;
+    color: #aaa;
+    border: 0px solid #ddd;
+    border-width: 1px 1px 1px 1px;
+    background: #f1f1f1;
+    border-radius: 3px 3px 0 0;
+}
+
+.tabs>label:before {
+    font-family: fontawesome;
+    font-weight: normal;
+    margin-right: 10px;
+}
+.tabs>label[for*="1"]:before {
+    content: "\f19a";
+}
+.tabs>label[for*="2"]:before {
+    content: "\f17a";
+}
+.tabs>label[for*="3"]:before {
+    content: "\f13b";
+}
+.tabs>label[for*="4"]:before {
+    content: "\f13c";
+}
+
+.tabs>label:hover {
+    color: #888;
+    cursor: pointer;
+}
+
+.tabs>input:checked+label {
+    color: #555;
+    border-top: 1px solid #FA871A;
+    border-bottom: 1px solid #fff;
+    background: #fff;
+}
+
+#tab1:checked~#content-tab1, #tab2:checked~#content-tab2, #tab3:checked~#content-tab3, #tab4:checked~#content-tab4 {
+    display: block;
+}
+
+@media screen and (max-width: 680px) {
+    .tabs>label {
+        font-size: 0;
+    }
+    .tabs>label:before {
+        margin: 0;
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .tabs>label {
+        padding: 15px;
+    }
+}
+
+
+
+

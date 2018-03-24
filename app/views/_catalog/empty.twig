@@ -1,0 +1,17 @@
+<div class="crumbs">
+    <ul>
+        <li><a href="{{ Url.home() }}">Главная</a></li>
+        <li><a href="{{ Url.toRoute('/products') }}">Продукция</a></li>
+        {% if category.parent.parent %}
+            <li><a href="{{ category.parent.parent.url }}">{{ category.parent.parent.info.name }}</a></li>
+        {% endif %}
+        {% if category.parent %}
+            <li><a href="{{ category.parent.url }}">{{ category.parent.info.name }}</a></li>
+        {% endif %}
+        <li><a href="{{ category.url }}">{{ category.info.name }}</a></li>
+
+    </ul>
+</div>
+<div class="webinar-page">
+    <h1>Товары в данной категории отсутствуют</h1>
+</div>

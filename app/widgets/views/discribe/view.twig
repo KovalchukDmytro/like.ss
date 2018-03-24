@@ -1,0 +1,14 @@
+<div>
+    <span>Подписка</span>
+    <form action="" id="js-discribe" class="sub">
+        <select required name="categories">
+            <option selected disabled hidden value="">Выберите подписку</option>
+            {% for cat in catalog %}
+            <option value="{{ cat.id }}">{{ cat.title }}</option>
+            {% endfor %}
+        </select>
+        <input required  type="email" name="email">
+        <input value="Отправить" type="submit">
+        <div class="js-text-discribe" id="good"></div>
+    </form>
+</div>

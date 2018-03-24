@@ -1,0 +1,134 @@
+<div class="crumbs">
+    <ul>
+        <li><a href="{{ Url.home() }}">Главная</a></li>
+        <li><a href="{{ Url.toRoute('/products') }}">Продукция</a></li>
+        {% if product.category.parent.parent %}
+            <li><a href="{{ product.category.parent.parent.url }}">{{ product.category.parent.parent.info.name }}</a></li>
+        {% endif %}
+        {% if product.category.parent %}
+            <li><a href="{{ product.category.parent.url }}">{{ product.category.parent.info.name }}</a></li>
+        {% endif %}
+        <li><a href="{{ product.category.url }}">{{ product.category.info.name }}</a></li>
+        <li><a href="{{ product.url }}">{{ product.info.name }}</a></li>
+
+
+    </ul>
+</div>
+<div class="card_product-page">
+    <div class="content-product">
+        <div>
+            <div class="block-img" id="large">
+                <img src="" />
+            </div>
+
+            <div id="mini" >
+
+                    {% for img in product.imgs  %}
+                        <img src="{{ img.simg }}" data-large="{{ img.bimg }}" />
+                    {% endfor %}
+
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="info-block-products">
+            <h1>{{ product.info.name }}</h1>
+            <div class="">
+                <div>
+                    <strong>Номер заказа</strong>
+                    <p>{{ product.articul }}</p>
+                    <input value="{{ product.articul }}" type="hidden">
+                </div>
+
+                <div>
+                    <h3>Характеристики</h3>
+                    <ul>
+                        {% for params in product.extraparams %}
+                        <li>{{ params.param_name }} - {{ params.value_name }}</li>
+                       {% endfor %}
+
+                    </ul>
+                </div>
+                <a id="popup">
+                    <button>Заказать</button>
+                </a>
+                <div id="modal_form">
+                    <span id="modal_close"></span>
+                    <form action="" id="js-pay" >
+                        <input type="text" name="name" required placeholder="Напишите Ваше имя...">
+                        <input type="tel" title="099-999-99-99"  placeholder="Напишите номер телефона..." name="phone" required pattern="0[0-9]{2}-[0-9]{3}-[0-9]{2}-[0-9]{2}" size="13">
+                        <input type="hidden" value="{{ product.id }}" name="product_id">
+                        <input class="button-send" type="submit" value="Узнать стоимость">
+                        <div class="js-text" id="ph"></div>
+                    </form>
+                </div>
+                <div id="overlay"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-products">
+        <div class="left-block">
+            <div>
+                <span>Документация</span>
+                <ul>
+                    <li>Документация</li>
+                    <li>Документация</li>
+                    <li>Документация</li>
+                </ul>
+            </div>
+            <div>
+                <span>Документация</span>
+                <ul>
+                    <li>Документация</li>
+                    <li>Документация</li>
+                    <li>Документация</li>
+                </ul>
+            </div>
+        </div>
+        <div class="right-block">
+            <div class="tabs">
+                <input id="tab1" type="radio" name="tabs" checked>
+                <label for="tab1" title="Вкладка 1">Описание</label>
+
+                <input id="tab2" type="radio" name="tabs">
+                <label for="tab2" title="Вкладка 2">Технические характеристики</label>
+
+                <input id="tab3" type="radio" name="tabs">
+                <label for="tab3" title="Вкладка 3">Вкладка 3</label>
+
+                <input id="tab4" type="radio" name="tabs">
+                <label for="tab4" title="Вкладка 4">Вкладка 4</label>
+                {% if product.info.txt %}
+                <section id="content-tab1">
+                  {{
+                      product.info.txt|raw
+                  }}
+                </section>
+                {% endif %}
+                {% if product.info.txt_1 %}
+                <section id="content-tab2">
+                    <div class="product-table">
+                        {{
+                    product.info.txt_1|raw
+                    }}
+                    </div>
+                </section>
+                {% endif %}
+                {% if product.info.txt_2 %}
+                <section id="content-tab3">
+                    {{ product.info.txt_2|raw }}
+                </section>
+                {% endif %}
+                {% if product.info.txt_3 %}
+                <section id="content-tab4">
+                    {{
+                    product.info.txt_3|raw
+                    }}
+                </section>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

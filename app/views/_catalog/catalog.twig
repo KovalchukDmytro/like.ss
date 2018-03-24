@@ -1,0 +1,31 @@
+<div class="laboratory-page">
+    <div class="crumbs">
+        <ul>
+            <li><a href="{{ Url.home() }}">Главная</a></li>
+            <li><a href="{{ Url.toRoute('/products') }}">Продукция</a></li>
+            <li><a href="{{ menu.url }}">{{ menu.info.name }}</a></li>
+            
+        </ul>
+    </div>
+    <h1>{{ menu.info.name }}</h1>
+    <img width="100%" src="images/lab.jpg">
+    {{ menu.info.txt|raw  }}
+    <div class="products-laboratory-block">
+        {%   for childs in menu.childs %}
+        <div>
+            <span>{{ childs.info.name }}</span>
+            {% if childs.childs %}
+
+            <ul>
+                {% for grandchilds in childs.childs %}
+                <li>
+                    <a href="{{ grandchilds.url }}" title="{{ grandchilds.info.name }}">{{ grandchilds.info.name }}</a>
+                </li>
+                {% endfor %}
+
+            </ul>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>

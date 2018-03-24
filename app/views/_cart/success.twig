@@ -1,0 +1,21 @@
+{{ set(this, 'title', 'Заказ успешно сохранен!' ) }}
+{{ use('app/widgets/AsideProductCategories') }}
+
+<div class="b-container">
+<aside class="c-sidebar">
+        {{ aside_product_categories_widget({
+            'dropdown' : true
+        }) }}
+		</aside>
+    <main class="c-page">
+        <div class="c-page__container">
+            <div class="b-404">
+                <div class="b-404__title">{{ this.params.thank_you }}!</div>
+                <div class="b-404__text">{{ this.params.your_order }} {{ this.params.created_successfully }}!</div>
+                <div class="b-404__text">{{ this.params.manager_will_call_you }}!</div>
+                <div class="b-404__img"><img src="/img/404.png" alt="Buratino - Logo"></div>
+                <div class="b-404__link"><a href="{{ Url.home() }}">{{ this.params.back_home }}</a></div>
+            </div>
+        </div>
+    </main>
+</div>

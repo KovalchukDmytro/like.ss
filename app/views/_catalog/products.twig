@@ -1,0 +1,23 @@
+<div class="crumbs">
+    <ul>
+        <li><a href="{{ Url.home() }}">Главная</a></li>
+        <li><a href="{{ Url.toRoute('/products') }}">Продукция</a></li>
+
+    </ul>
+</div>
+<div class="products-page">
+
+    <h1>{{ Seo.get('h1') }}</h1>
+    <div class="products-block">
+        {% for m in menu %}
+        <div>
+            <a href="{{ m.url }}">
+                <img src="/images/bpsol1.jpg">
+                <span>{{ m.info.name }}</span>
+            </a>
+        </div>
+        {% endfor %}
+
+    </div>
+    {{ Seo.get('text') }}
+</div>

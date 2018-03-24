@@ -1,0 +1,34 @@
+{{ use('app/widgets/Sbreadcrumbs') }}
+{{ use('app/widgets/AsideProductCategories') }}
+
+<!-- breadcrumbs -->
+<div class="b-breadcrumbs">
+    {{ Sbreadcrumbs_widget({'links' : breadcrumbs}) }}
+</div>
+<!-- /breadcrumbs -->
+
+<div class="b-container">
+<aside class="c-sidebar">
+        {{ aside_product_categories_widget({
+            'dropdown' : true
+        }) }}
+		</aside>
+    <main class="c-page">
+        <div class="c-page__header">
+            <h1 class="c-page__title">{{ share.info.title | raw }}</h1>
+        </div>
+        <div class="c-page__content">
+            <div class="g-row">
+                <div class="g-col--three-fifth">
+                    {{ share.info.text | raw }}
+                    {% if share.price %}
+                        <p>{{ this.params.price }}: <span class="g-text--color-alt">{{ share.price }} {{ this.params.tenge }}</span></p>
+                    {% endif %}
+                </div>
+                <div class="g-col--two-fifth g-text--right">
+                    <img src="{{ share.bimg }}" alt="{{ share.info.title }}">
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
