@@ -1,82 +1,47 @@
+<?php  use yii\helpers\Url; ?>
 <div class="container">
 	<div class="row">
 		<div class="col-xs-12">
 			<ol class="breadcrumb">
-				<li><a href="/">Главная</a></li>
-				<li><a>Новости</a></li>
+				<li><a href="<?= Url::toRoute( '/' ) ?>"><?= $this->params['home-page'] ?></a></li>
+				<li><a><?= $this->params['news-page'] ?></a></li>
 			</ol>
 		</div>
 	</div>
 </div>
-<main>
-	<section class="section--news-page">
-		<div class="container container--bordered">
-			<div class="row">
-				<div class="col-xs-12">
-                    <?php use app\widgets\SLinkPager;
-                    use yii\widgets\LinkPager;
+<main class="main-content background-image">
+    <div class="container container--bordered">
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="section--news-page">
+	                <?php
+                    use app\components\BaseController;
+	                use app\widgets\SLinkPager;
 
-                    foreach ($models as $model){?>
-                        <article class="post__item clearfix">
-                            <time class="post__date"><?=$model->date ?></time>
-                            <figure class="post__image-wrapper"><img class="post__image" src="<?=$model->bimg ?>" alt="">
-                                <figcaption class="post__image-description"><a class="post__image-link" href="/news/<?=$model->alias ?>">Подробнее			</a></figcaption>
-                            </figure><a class="post__link" href="/news/<?=$model->alias ?>">
-                                <h3 class="post__title"><?=$model->info->title ?></h3></a>
-                            <p class="post__description"><?=$model->info->text ?></p>
+	                foreach ($models as $model):?>
+                        <article class="row post-item clearfix">
+                            <div class="col-sm-10 col-sm-offset-1 col-md-4 col-md-offset-0">
+                                <time class="post-date"><?= BaseController::changeDate( $model->date) ?></time>
+                                <figure class="post-wrapper"><img class="post-image" src="<?=$model->bimg ?>" alt="">
+                                    <figcaption class="post-image-desc"><a class="post-image-link" href="/news/<?=$model->alias ?>"><?= $this->params['learn-more-index'] ?></a></figcaption>
+                                </figure>
+                            </div>
+                            <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-0"><a class="post-link" href="<?= Url::toRoute( '/news/'.$model->alias ) ?>">
+                                    <h3 class="post-title"><?=$model->info->title ?></h3></a>
+                                <p class="post-description"><?=$model->info->text ?></p>
+                            </div>
                         </article>
-                    <?php } ?>
-				</div>
-				<div class="col-xs-12">
-					<?php
-					echo SLinkPager::widget([
-						'pagination' => $pages,
-					]);
+                    <?php endforeach; ?>
+                    <div class="col-sm-12">
+	                    <?php
+	                    echo SLinkPager::widget([
+		                    'pagination' => $pages,
+	                    ]);
 
-					?>
-
-                    <ul class="pagination">
-
-						<li class="pagination__item"><a class="pagination__link" href="#">&laquo;</a></li>
-						<li class="pagination__item"><a class="pagination__link" href="#">1</a></li>
-						<li class="pagination__item"><a class="pagination__link" href="#">2</a></li>
-						<li class="pagination__item"><a class="pagination__link pagination__link--current" href="#">3</a></li>
-						<li class="pagination__item"><a class="pagination__link" href="#">4</a></li>
-						<li class="pagination__item"><a class="pagination__link" href="#">5</a></li>
-						<li class="pagination__item"><a class="pagination__link" href="#">&raquo;</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- partners-->
-	<section class="section section--partners">
-		<h2 class="section__title wow zoomIn" data-wow-delay="0.3s">Партнеры</h2>
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12">
-					<div class="owl-carousel owl-theme owl-wrapper" id="partners-carousel">
-						<div class="item">
-							<figure class="slide"><img class="slide-image" src="images/partners/carousel-image-1.png" alt=""></figure>
-						</div>
-						<div class="item">
-							<figure class="slide"><img class="slide-image" src="images/partners/carousel-image-2.png" alt=""></figure>
-						</div>
-						<div class="item">
-							<figure class="slide"><img class="slide-image" src="images/partners/carousel-image-3.jpg" alt=""></figure>
-						</div>
-						<div class="item">
-							<figure class="slide"><img class="slide-image" src="images/partners/carousel-image-4.png" alt=""></figure>
-						</div>
-						<div class="item">
-							<figure class="slide"><img class="slide-image" src="images/partners/carousel-image-5.png" alt=""></figure>
-						</div>
-						<div class="item">
-							<figure class="slide"><img class="slide-image" src="images/partners/carousel-image-6.png" alt=""></figure>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+	                    ?>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
 </main>

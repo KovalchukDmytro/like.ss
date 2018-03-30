@@ -67,6 +67,11 @@ $config = [
 				'about-us' => 'site/about',
 				'contacts' => 'site/contacts',
 
+				'service/<category>'=>'service/category',
+
+				'portfolio/<alias>'=>'portfolio/view',
+				'portfolio'=>'portfolio/index',
+
 				'news/<alias>'=>'news/view',
 				'news/page/<page>'=>'news/index',
 				'news'=>'news/index',

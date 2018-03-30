@@ -12,10 +12,10 @@ class SLinkPager extends \yii\widgets\LinkPager {
 	public $firstPageLabel = false;
 	public $lastPageLabel = false;
 	public $activePageCssClass = "";
-	public $firstPageCssClass = 'pagination__item';
-	public $prevPageCssClass = 'pagination__item';
-	public $nextPageCssClass = 'pagination__item';
-	public $lastPageCssClass = 'pagination__item';
+	public $firstPageCssClass = 'pagination-item';
+	public $prevPageCssClass = 'pagination-item';
+	public $nextPageCssClass = 'pagination-item';
+	public $lastPageCssClass = 'pagination-item';
 	
 	/**
 	 * Creates the URL suitable for pagination with the specified page number.
@@ -119,7 +119,7 @@ class SLinkPager extends \yii\widgets\LinkPager {
 //            {
 //                $custom_buttons[] = "<li class='active'>".$button."</li>";
 //            } else {
-			$custom_buttons[] = "<li class='pagination__item'>" . $button . "</li>";
+			$custom_buttons[] = "<li class='pagination-item'>" . $button . "</li>";
 //            }
 		}
 
@@ -131,7 +131,7 @@ class SLinkPager extends \yii\widgets\LinkPager {
 		$options = [ 'class' => ( $class === '' ? null : $class ) ];
 
 		if ( $active ) {
-			$options['class'] = 'pagination__link pagination__link--current';
+			$options['class'] = 'pagination-link pagination-link--current';
 			Html::addCssClass( $options, $this->activePageCssClass );
 
 			return Html::tag( 'a', $label, $options );

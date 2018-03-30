@@ -51,12 +51,12 @@ class NewsController extends \app\components\BaseController
 
             'name' => 'Sartorius',
         ]);
-        $model=News::find()->byAlias($alias)->joinWith('info')->limit(1)->one();
+        $content['model']=News::find()->byAlias($alias)->joinWith('info')->limit(1)->one();
+	    $content['model']->date=$this->changeDate($content['model']->date);
 
-        return $this->render('view.php', [
-            'model'  => $model
+        return $this->render('view', [
+            'content'  => $content
 
         ]);
     }
-
 }

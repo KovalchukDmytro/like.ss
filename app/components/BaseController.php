@@ -116,4 +116,9 @@ class BaseController extends \yii\web\Controller {
 
 		return $protocol . '://' . $host;
 	}
+	public function changeDate($in)
+	{
+		$arr=explode('-', $in);
+		return $arr[2].'.'.$arr[1].'.'.$arr[0];
+	}
 } 
